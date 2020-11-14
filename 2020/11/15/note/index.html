@@ -1,0 +1,355 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>note - zhouziyu blog</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="zhouziyu,"> 
+    <meta name="description" content="js深拷贝数组拷贝
+concat() 只能实现浅拷贝
+slice()   只能实现浅拷贝   
+JSON.parse(JSON.stringify()) 可实现深拷贝但不能拷贝函数类型递归实现
+缺点,"> 
+    <meta name="author" content="zhouziyu"> 
+    <link rel="alternative" href="atom.xml" title="zhouziyu blog" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads"
+        src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">zhouziyu blog</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://zhouziyu.cn"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">note</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">note</h1>
+        <div class="stuff">
+            <span>十一月 15, 2020</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/js/" rel="tag">js</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h3 id="js"><a href="#js" class="headerlink" title="js"></a>js</h3><h5 id="深拷贝"><a href="#深拷贝" class="headerlink" title="深拷贝"></a>深拷贝</h5><h6 id="数组拷贝"><a href="#数组拷贝" class="headerlink" title="数组拷贝"></a>数组拷贝</h6><ul>
+<li>concat() 只能实现浅拷贝</li>
+<li>slice()   只能实现浅拷贝   </li>
+<li>JSON.parse(JSON.stringify()) 可实现深拷贝但不能拷贝函数类型<h6 id="递归实现"><a href="#递归实现" class="headerlink" title="递归实现"></a>递归实现</h6></li>
+<li>缺点：耗性能<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;*</span><br><span class="line">* 实现深拷贝</span><br><span class="line">* @params obj</span><br><span class="line">* @return obj</span><br><span class="line">**&#x2F;    </span><br><span class="line">const deepCopy &#x3D; (obj) &#x3D;&gt; &#123;</span><br><span class="line">  if (typeof obj !&#x3D;&#x3D; &#39;object&#39;) return;</span><br><span class="line">  let newObj &#x3D; obj instanceof Array ? [] : &#123;&#125;;</span><br><span class="line">  for (let key in obj) &#123;</span><br><span class="line">    if (obj.hasOwnProperty(key)) &#123;</span><br><span class="line">      newObj[key] &#x3D; typeof obj[key] &#x3D;&#x3D;&#x3D; &#39;object&#39; ? deepCopy(obj[key]) : obj[key];</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  return newObj;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<h5 id="instanceof-总结"><a href="#instanceof-总结" class="headerlink" title="instanceof 总结"></a>instanceof 总结</h5><ul>
+<li>简单用法</li>
+</ul>
+<p>用来判断一个实例是否属于某种类型</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 判断 foo 是否是 Foo 类的实例</span><br><span class="line">function Foo()&#123;&#125; </span><br><span class="line">var foo &#x3D; new Foo(); </span><br><span class="line">console.log(foo instanceof Foo) &#x2F;&#x2F;true</span><br></pre></td></tr></table></figure>
+<p>同时适用于多层继承关系</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 判断 foo 是否是 Foo 类的实例 , 并且是否是其父类型的实例</span><br><span class="line">function Aoo()&#123;&#125; </span><br><span class="line">function Foo()&#123;&#125; </span><br><span class="line">Foo.prototype &#x3D; new Aoo();&#x2F;&#x2F;JavaScript 原型继承</span><br><span class="line"> </span><br><span class="line">var foo &#x3D; new Foo(); </span><br><span class="line">console.log(foo instanceof Foo)&#x2F;&#x2F;true </span><br><span class="line">console.log(foo instanceof Aoo)&#x2F;&#x2F;true</span><br></pre></td></tr></table></figure>
+<ul>
+<li>复杂用法</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">console.log(Object instanceof Object);&#x2F;&#x2F;true </span><br><span class="line">console.log(Function instanceof Function);&#x2F;&#x2F;true </span><br><span class="line">console.log(Number instanceof Number);&#x2F;&#x2F;false </span><br><span class="line">console.log(String instanceof String);&#x2F;&#x2F;false </span><br><span class="line"> </span><br><span class="line">console.log(Function instanceof Object);&#x2F;&#x2F;true </span><br><span class="line"> </span><br><span class="line">console.log(Foo instanceof Function);&#x2F;&#x2F;true </span><br><span class="line">console.log(Foo instanceof Foo);&#x2F;&#x2F;false</span><br></pre></td></tr></table></figure>
+<p>f instanceof F (instanceof 左右分别用 f F 代替,f代表F的实例，F代表构造函数)</p>
+<p>判断步骤：</p>
+<ol>
+<li><p>找出F的prototype</p>
+</li>
+<li><p>找出f的<strong>proto</strong></p>
+</li>
+<li><p>第一次判断  f.__proto__ === F.prototype ? 返回true : 步骤4</p>
+</li>
+<li><p>循环查找f.__proto__是否还有<strong>proto</strong> ? 步骤3 ：返回false</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Foo instanceof Foo  &#x2F;&#x2F; false</span><br><span class="line"></span><br><span class="line">f &#x3D; Foo,  &#x2F;&#x2F; 左侧</span><br><span class="line">F &#x3D; Foo;  &#x2F;&#x2F; 右侧</span><br><span class="line">&#x2F;&#x2F; 下面根据规范逐步推演 </span><br><span class="line">R &#x3D; F.prototype &#x3D; Foo.prototype </span><br><span class="line">L &#x3D; f.__proto__ &#x3D; Function.prototype </span><br><span class="line">&#x2F;&#x2F; 第一次判断</span><br><span class="line">R !&#x3D; L </span><br><span class="line">&#x2F;&#x2F; 循环再次查找 L 是否还有 __proto__ </span><br><span class="line">L &#x3D; Function.prototype.__proto__ &#x3D; Object.prototype </span><br><span class="line">&#x2F;&#x2F; 第二次判断</span><br><span class="line">R !&#x3D; L </span><br><span class="line">&#x2F;&#x2F; 再次循环查找 L 是否还有 __proto__ </span><br><span class="line">L &#x3D; Object.prototype.__proto__ &#x3D; null </span><br><span class="line">&#x2F;&#x2F; 第三次判断</span><br><span class="line">L &#x3D;&#x3D; null </span><br><span class="line">&#x2F;&#x2F; 返回 false</span><br></pre></td></tr></table></figure>
+<h5 id="new-操作符原理"><a href="#new-操作符原理" class="headerlink" title="new 操作符原理"></a>new 操作符原理</h5></li>
+<li><p>创建一个新对象；[var o = {};]</p>
+</li>
+<li><p>将构造函数的作用域赋给新对象（因此this指向了这个新对象）；[Person.apply(o)] [Person原来的this指向的是window]</p>
+</li>
+<li><p>执行构造函数中的代码(为这个新对象添加属性)；</p>
+</li>
+<li><p>返回新对象。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">let New &#x3D; function (P) &#123;</span><br><span class="line">        let o &#x3D; &#123;&#125;;</span><br><span class="line">        let arg &#x3D; Array.prototype.slice.call(arguments,1);</span><br><span class="line">        </span><br><span class="line">        o.__proto__ &#x3D; P.prototype;</span><br><span class="line">        P.prototype.constructor &#x3D; P;</span><br><span class="line">       </span><br><span class="line">        P.apply(o,arg);</span><br><span class="line">        </span><br><span class="line">        return o;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<h5 id="函数防抖"><a href="#函数防抖" class="headerlink" title="函数防抖"></a>函数防抖</h5><p>在前端开发中会遇到一些频繁的事件触发，比如：</p>
+</li>
+<li><p>window 的 resize、scroll</p>
+</li>
+<li><p>mousedown、mousemove</p>
+</li>
+<li><p>keyup、keydown</p>
+</li>
+</ol>
+<p>过于频繁触发时间会造成卡顿等问题</p>
+<ul>
+<li>防抖原理：多次触发事件，但期望只执行一次<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; immediate 是否要立即执行</span><br><span class="line">function debounce(fn, wait, immediate &#x3D; false) &#123;</span><br><span class="line">    if (immediate) &#123;</span><br><span class="line">        let lastTime &#x3D; 0</span><br><span class="line">        return function (...args) &#123;</span><br><span class="line">            const now &#x3D; new Date()</span><br><span class="line">            if (now - lastTime &gt; wait) &#123;</span><br><span class="line">                fn.apply(this, args);</span><br><span class="line">                lastTime &#x3D; now;</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        let timer</span><br><span class="line">        return function (...args) &#123;</span><br><span class="line">            clearTimeout(timer)</span><br><span class="line">            timer &#x3D; setTimeout(() &#x3D;&gt; &#123;</span><br><span class="line">                fn.apply(this, args)</span><br><span class="line">            &#125;, wait)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">如果这一次与上一次时间间隔在wait以内，就不执行，否则就执行。</span><br><span class="line">注意，这里的上一次不是指上一次fn执行的时候，而是指上一次debounce函数执行的时候。</span><br><span class="line">&#96;&#96;&#96; </span><br><span class="line">##### 函数节流</span><br><span class="line">- 节流原理：在可以接受的一定频率的重复调用</span><br><span class="line">- 实现：两种主流的实现方式，一种是使用时间戳，一种是设置定时器。</span><br><span class="line">1. 使用时间戳</span><br></pre></td></tr></table></figure>
+function trottle (fn, wait) {<br>let lastTime = 0;<br>return (…args) =&gt; {<br>  const now = new Date();<br>  if (now - lastTime &gt; wait) {<pre><code>fn.apply(this, args);
+lastTime = now;</code></pre>
+  }<br>}<br>}<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2. 设置定时器</span><br></pre></td></tr></table></figure>
+function trottle (fn, wait) {<br>let timer;<br>return function (…args) {<br>  if (!timer) {<pre><code>timer = setTimeout(() =&gt; &#123;
+  fn.apply(this, args);
+  timer = null;
+&#125;, wait);</code></pre>
+  }<br>}<br>}</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">* 第一种事件会立刻执行，第二种事件会在 n 秒后第一次执行</span><br><span class="line">* 第一种事件停止触发后没有办法再执行事件，第二种事件停止触发后依然会再执行一次事件</span><br><span class="line">3. 综合法</span><br></pre></td></tr></table></figure>
+<p>/**<br>但是我有时也希望无头有尾，或者有头无尾，这个咋办？<br>那我们设置个 options 作为第三个参数，然后根据传的值判断到底哪种效果，我们约定:<br>leading：false 表示禁用第一次执行<br>trailing: false 表示禁用停止触发的回调<br>**/<br>function throttle(func, wait, options={}) {<br>    var timeout, context, args, result;<br>    var previous = 0;</p>
+<pre><code>var later = function() &#123;
+    previous = options.leading === false ? 0 : new Date().getTime();
+    timeout = null;
+    func.apply(context, args);
+    if (!timeout) context = args = null;
+&#125;;
+
+var throttled = function() &#123;
+    var now = new Date().getTime();
+    if (!previous &amp;&amp; options.leading === false) previous = now;
+    var remaining = wait - (now - previous);
+    context = this;
+    args = arguments;
+    if (remaining &lt;= 0 || remaining &gt; wait) &#123;
+        if (timeout) &#123;
+            clearTimeout(timeout);
+            timeout = null;
+        &#125;
+        previous = now;
+        func.apply(context, args);
+        if (!timeout) context = args = null;
+    &#125; else if (!timeout &amp;&amp; options.trailing !== false) &#123;
+        timeout = setTimeout(later, remaining);
+    &#125;
+&#125;;
+return throttled;</code></pre>
+<p>}</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">##### call、apply、bind</span><br><span class="line">- 区别和联系</span><br><span class="line">1. 通过第一个参数可以改变this指向，默认是window</span><br><span class="line">2. apply 第二个参数传入的是数组 会立即执行函数</span><br><span class="line">3. call  第二个参数开始是接收的参数列表 会立即执行函数</span><br><span class="line">4. bind 方法不会立即执行，而是返回一个改变了上下文 this 后的函数</span><br><span class="line">|方法|第二个参数|是否立即执行|返回值|</span><br><span class="line">|:---:|:---:|:---:|:---:|</span><br><span class="line">|apply|传数组|是| |</span><br><span class="line">|call|参数列表|是| |</span><br><span class="line">|bind|参数列表|否|返回一个改变了上下文 this 后的函数</span><br><span class="line">- 模拟Function.prototype.call</span><br></pre></td></tr></table></figure>
+<p>Function.prototype.call = Function.prototype.call || function (context) {<br>  context = context || window; // this传入null时默认为window<br>  context.fn = this;<br>  let args = [];<br>  for (let i=0, len=arguments.length; i&gt;len; i++) {<br>    args.push(<code>arguments[$&#123;i&#125;]</code>);<br>  }<br>  const result = eval(<code>context.fn($&#123;args&#125;)</code>);<br>  delete context.fn;<br>  return result;<br>}</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- 模拟Function.prototype.apply</span><br></pre></td></tr></table></figure>
+<p>Function.prototype.apply = Function.prototype.apply || function (context, arr) {<br>  context = context || window;<br>  context.fn = this;<br>  let result;<br>  if (!arr) {<br>    result = context.fn();<br>  } else {<br>    let args = [];<br>    for (var i = 0, len = arr.length; i &lt; len; i++) {<br>      args.push(‘arr[‘ + i + ‘]’);<br>    }<br>    result = eval(‘context.fn(‘ + args + ‘)’)<br>  }<br>  delete context.fn;<br>  return result;<br>}</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- 模拟Function.prototype.bind</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">##### 数组的一些方法</span><br><span class="line">- map</span><br></pre></td></tr></table></figure>
+<p>Array.prototype.map = Array.prototype.map || function (fn) {<br>      for (var i = 0, m = this.length, res = [], tmp; i &lt; m; i++) {<br>        tmp = this[i];<br>        res.push(fn.call(tmp, tmp, i, this));<br>      }<br>      return res;<br>}</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">##### arguments和数组有什么区别？怎么把arguments变成数组？</span><br><span class="line">argument是对象，是Object的实例，不能调用数组的方法。转数组可以[].slice.call(arguments)，es6直接Array.from(arguments)或通过数组扩展运算符[...arguments]</span><br><span class="line">##### 如何判断NaN?</span><br><span class="line">1.  isNaN</span><br><span class="line">2. </span><br></pre></td></tr></table></figure>
+<p>function checkIfNaN(value) {<br>  return value !== value;<br>}</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">##### 如何判断数组？</span><br><span class="line">1. instanceOf</span><br><span class="line">2. Object.prototype.toString.call([]) &#x3D;&#x3D;&#x3D; &#39;[object Array]&#39;</span><br><span class="line">##### 如何判断对象中是否有某个属性？</span><br><span class="line">1. hasOwnProperty</span><br><span class="line">2. in   &#x2F;&#x2F; 原型中的属性也会遍历出来</span><br><span class="line">### JS运行机制</span><br><span class="line">[从Event Loop谈JS的运行机制](https:&#x2F;&#x2F;juejin.im&#x2F;post&#x2F;5a6547d0f265da3e283a1df7#heading-16)</span><br><span class="line"></span><br><span class="line">### ES6</span><br><span class="line">##### ES6新增了那些内容？</span><br><span class="line">- promise</span><br><span class="line">- 模版字符串</span><br><span class="line">- 对象的结构赋值</span><br><span class="line">- ...运算符</span><br><span class="line">- class</span><br><span class="line">- 块级作用域 let const </span><br><span class="line">- proxy 代理</span><br><span class="line">- 模版字符串</span><br><span class="line">- 箭头函数</span><br><span class="line">#####  promise怎么理解？</span><br><span class="line">让**异步**操作逻辑更加清晰，解决了异步操作的回调嵌套问题。promise对象有三种状态，pending、fulfilled和rejected，promise对象内部保存一个需要执行一段时间的异步操作，当异步操作执行结束后可以调用resolve或reject方法，来改变promise对象的状态，状态一旦改变就不能再变。new 一个promise后可以通过then方法，指定resolved和rejected时的回调函数。</span><br><span class="line">##### 什么是箭头函数？</span><br><span class="line">1. () &#x3D;&gt; &#123;&#125;</span><br><span class="line">2. this指向不同</span><br><span class="line">3. 没有arguments....</span><br><span class="line">4. 不能作为构造函数不能 new</span><br><span class="line">5. 函数里只有一句语句时会有默认return值</span><br><span class="line"></span><br><span class="line">### vue双向数据绑定</span><br><span class="line">[双向数据绑定原理1](https:&#x2F;&#x2F;juejin.im&#x2F;post&#x2F;5b86119a6fb9a019f928d82d)</span><br><span class="line">[双向数据绑定原理2](https:&#x2F;&#x2F;juejin.im&#x2F;post&#x2F;5b285c576fb9a00e2f601f09)</span><br><span class="line">### 跨域问题</span><br><span class="line">##### 什么是跨域？</span><br><span class="line">跨域是指一个域下的文档或脚本试图去请求另一个域下的资源，这里跨域是广义的。</span><br><span class="line">###### 广义的跨域</span><br><span class="line">- 资源跳转： A链接、重定向、表单提交</span><br><span class="line">- 资源嵌入： \&lt;link&gt;、\&lt;script&gt;、\&lt;img&gt;、\&lt;frame&gt;等dom标签，还有样式中background:url()、@font-face()等文件外链</span><br><span class="line">- 脚本请求： js发起的ajax请求、dom和js对象的跨域操作等</span><br><span class="line"></span><br><span class="line">其实我们通常所说的跨域是狭义的，是由浏览器同源策略限制的一类请求场景。</span><br><span class="line">###### 什么是同源策略？</span><br><span class="line">同源策略是一种约定，由Netscape公司1995年引入浏览器，它是浏览器最核心也最基本的安全功能，如果缺少了同源策略，浏览器很容易受到XSS、CSFR等攻击。所谓同源是指&quot;**协议+域名+端口**&quot;三者相同，即便两个不同的域名指向同一个ip地址，也非同源。</span><br><span class="line">###### 同源策略限制以下几种行为：</span><br><span class="line">- Cookie、LocalStorage 和 IndexDB 无法读取</span><br><span class="line">- DOM 和 Js对象无法获得</span><br><span class="line">- AJAX 请求不能发送</span><br><span class="line">###### 跨域解决方案</span><br><span class="line">- nginx</span><br><span class="line">- 通过jsonp跨域</span><br><span class="line">- CORS (跨域资源共享)</span><br><span class="line">- nodejs中间件代理跨域</span><br><span class="line">- WebSocket协议跨域</span><br><span class="line">1. nginx</span><br></pre></td></tr></table></figure>
+<p>server {<br>    listen       8080;<br>    server_name  <a target="_blank" rel="noopener" href="http://www.domain.com/">www.domain.com</a>;   // 域名</p>
+<pre><code>location / &#123;
+    proxy_pass   http://www.domain2.com:8080;  //反向代理
+    proxy_cookie_domain www.domain2.com www.domain1.com; //修改cookie里域名
+    index  index.html index.htm;
+
+  //当用webpack-dev-server等中间件代理接口访问nignx时，此时无浏览器参与，故没有同源限制，下面的跨域配置可不启用
+    add_header Access-Control-Allow-Origin http://www.domain1.com;  //当前端只跨域不带cookie时，可为*
+    add_header Access-Control-Allow-Credentials true;
+&#125;</code></pre>
+<p>}</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">2. jsonp</span><br><span class="line">jsonp缺点：只能实现get一种请求</span><br></pre></td></tr></table></figure>
+<script>
+    var script = document.createElement('script');
+    script.type = 'text/javascript';
+
+    // 传参并指定回调执行函数为onBack
+    script.src = 'http://www.domain2.com:8080/login?user=admin&callback=onBack';
+    document.head.appendChild(script);
+
+    // 回调执行函数
+    function onBack(res) {
+        alert(JSON.stringify(res));
+    }
+ </script>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">3. CORS (跨域资源共享)</span><br><span class="line">普通跨域请求：只服务端设置Access-Control-Allow-Origin即可，前端无须设置，若要带cookie请求：前后端都需要设置。</span><br></pre></td></tr></table></figure>
+<p>// 前端设置是否带cookie<br>xhr.withCredentials = true; // 原生<br>// jQuery<br>$.ajax({<br>    …<br>   xhrFields: {<br>       withCredentials: true    // 前端设置是否带cookie<br>   },<br>   crossDomain: true,   // 会让请求头中包含跨域的额外信息，但不会含cookie<br>    …<br>});<br>// vue axios<br>axios.defaults.withCredentials = true<br>// vue vue-resource<br>Vue.http.options.credentials = true</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">4.  Nodejs中间件代理跨域</span><br><span class="line">node中间件实现跨域代理，原理大致与nginx相同，都是通过启一个代理服务器，实现数据的转发，也可以通过设置cookieDomainRewrite参数修改响应头中cookie中域名，实现当前域的cookie写入，方便接口登录认证。</span><br></pre></td></tr></table></figure>
+<p>var express = require(‘express’);<br>var proxy = require(‘http-proxy-middleware’);<br>var app = express();</p>
+<p>app.use(‘/‘, proxy({<br>    // 代理跨域目标接口<br>    target: ‘<a href="http://www.domain2.com:8080&#39;">http://www.domain2.com:8080&#39;</a>,<br>    changeOrigin: true,</p>
+<pre><code>// 修改响应头信息，实现跨域并允许带cookie
+onProxyRes: function(proxyRes, req, res) &#123;
+    res.header(&#39;Access-Control-Allow-Origin&#39;, &#39;http://www.domain1.com&#39;);
+    res.header(&#39;Access-Control-Allow-Credentials&#39;, &#39;true&#39;);
+&#125;,
+
+// 修改响应信息中的cookie域名
+cookieDomainRewrite: &#39;www.domain1.com&#39;  // 可以为false，表示不修改</code></pre>
+<p>}));</p>
+<p>app.listen(3000);<br>console.log(‘Proxy server is listen at port 3000…’);</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">5. WebSocket协议跨域</span><br><span class="line">WebSocket protocol是HTML5一种新的协议。它实现了浏览器与服务器全双工通信，同时允许跨域通讯，是server push技术的一种很好的实现。</span><br><span class="line">原生WebSocket API使用起来不太方便，我们使用Socket.io，它很好地封装了webSocket接口，提供了更简单、灵活的接口，也对不支持webSocket的浏览器提供了向下兼容。</span><br></pre></td></tr></table></figure>
+<p>// 前端代码</p>
+<div>user input：<input type="text"></div>
+<script src="./socket.io.js"></script>
+<script>
+var socket = io('http://www.domain2.com:8080');
+
+<p>// 连接成功处理<br>socket.on(‘connect’, function() {<br>    // 监听服务端消息<br>    socket.on(‘message’, function(msg) {<br>        console.log(‘data from server: —&gt; ‘ + msg);<br>    });</p>
+<pre><code>// 监听服务端关闭
+socket.on(&#39;disconnect&#39;, function() &#123; 
+    console.log(&#39;Server socket has closed.&#39;); 
+&#125;);</code></pre>
+<p>});</p>
+<p>document.getElementsByTagName(‘input’)[0].onblur = function() {<br>    socket.send(this.value);<br>};<br></script></p>
+<p>// node.js<br>var http = require(‘http’);<br>var socket = require(‘socket.io’);</p>
+<p>// 启http服务<br>var server = http.createServer(function(req, res) {<br>    res.writeHead(200, {<br>        ‘Content-type’: ‘text/html’<br>    });<br>    res.end();<br>});</p>
+<p>server.listen(‘8080’);<br>console.log(‘Server is running at port 8080…’);</p>
+<p>// 监听socket连接<br>socket.listen(server).on(‘connection’, function(client) {<br>    // 接收信息<br>    client.on(‘message’, function(msg) {<br>        client.send(‘hello：’ + msg);<br>        console.log(‘data from client: —&gt; ‘ + msg);<br>    });</p>
+<pre><code>// 断开处理
+client.on(&#39;disconnect&#39;, function() &#123;
+    console.log(&#39;Client socket has closed.&#39;); 
+&#125;);</code></pre>
+<p>});</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 浏览器缓存</span><br><span class="line">[浏览器缓存知识小结及应用（强推）](http:&#x2F;&#x2F;www.cnblogs.com&#x2F;lyzg&#x2F;p&#x2F;5125934.html)</span><br><span class="line">### 浏览器渲染原理</span><br><span class="line">[浏览器渲染原理详细讲解](https:&#x2F;&#x2F;juejin.im&#x2F;post&#x2F;5a6547d0f265da3e283a1df7)</span><br><span class="line">###### 浏览器渲染过程</span><br><span class="line">输入URL到获取资源</span><br><span class="line">- 输入URL，浏览器主进程接管，开一个下载线程</span><br><span class="line">- http协议生成针对目标服务器的一个http请求数据包（http请求报文）</span><br><span class="line">- DNS解析IP地址</span><br><span class="line">- TCP将请求报文分割成有序带编号的报文片段，传输报文段</span><br><span class="line">- IP协议职责，一边中转一边传送</span><br><span class="line">- TCP接收报文段并按编号对报文段进行重组</span><br><span class="line">- http协议对请求内容做处理</span><br><span class="line"></span><br><span class="line">浏览器内核拿到内容后，渲染过程：</span><br><span class="line">- 解析html，生成DOM数</span><br><span class="line">- 将CSS代码解析成树形结构，与DOM树结合生成render树</span><br><span class="line">- 布局render树（重绘&#x2F;重排），计算各元素尺寸、位置</span><br><span class="line">- 绘制render树，绘制页面像素信息</span><br><span class="line">- 浏览器会把各层信息发给GPU，GPU拿到信息后绘制到页面上</span><br><span class="line">### http协议</span><br><span class="line">[http协议](https:&#x2F;&#x2F;juejin.im&#x2F;post&#x2F;5ad4465d6fb9a028da7d0117)</span><br><span class="line">- 超文本传输协议，是最广泛的一种网络传输协议，www都基于这种协议传输</span><br><span class="line">- 基于TCP&#x2F;IP协议进行数据传输</span><br><span class="line">- http协议是应用层协议，由请求和响应构成，无状态，默认端口号为80</span><br><span class="line">###### 存在问题</span><br><span class="line">- 不具备加密功能，使用明文传送，可能会被窃听</span><br><span class="line">- 无法认证通信双方的访问权限</span><br><span class="line">- 传输过程中信息可能会被篡改</span><br><span class="line"></span><br><span class="line">### https协议</span><br><span class="line">[https协议](https:&#x2F;&#x2F;juejin.im&#x2F;post&#x2F;5ad6ad575188255c272273c4)</span><br><span class="line">- 超文本传输安全协议，是一种通过计算机网络进行安全通信的传输协议</span><br><span class="line">- https经由http进行通信，但利用SSL&#x2F;TLS来加密数据包</span><br><span class="line">- https开发的主要目的，是提供对网站服务器的身份认证，保护交换数据的隐私与完整性</span><br><span class="line"></span><br><span class="line">[http三次握手四次挥手](https:&#x2F;&#x2F;blog.csdn.net&#x2F;dakun012&#x2F;article&#x2F;details&#x2F;86509966)</span><br><span class="line">### css部分</span><br><span class="line">##### rem和em区别</span><br><span class="line">rem是基于根元素font-size进行计算，em稍微复杂，元素font-size属性是相对于父元素font-size计算，其他属性相对于本元素font-size计算。</span><br><span class="line">##### BFC</span><br><span class="line">###### 概念：</span><br><span class="line">BFC（块级格式上下文）：它是页面中的一块渲染区域，有自己的渲染规则，决定了其子元素如何布局，以及和其他元素之间的关系和作用</span><br><span class="line">###### 原理：</span><br><span class="line">- 内部的Box会在垂直方向，一个接一个地放置</span><br><span class="line">- Box垂直方向的距离由margin决定。属于同一个BFC的两个相邻Box的margin会发生重叠</span><br><span class="line">- 每个元素的margin box的左边， 与包含块border box的左边相接触(对于从左往右的格式化，否则相反</span><br><span class="line">- BFC的区域不会与float box重叠</span><br><span class="line">- BFC就是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面的元素</span><br><span class="line">- 计算BFC的高度时，浮动元素也参与计算</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">###### 哪些元素会生成 BFC</span><br><span class="line">- 根元素，即HTML元素</span><br><span class="line">- float的值不为none</span><br><span class="line">- overflow的值不为visible</span><br><span class="line">- display的值为inline-block、table-cell、table-caption</span><br><span class="line">- position的值为absolute或fixed</span><br><span class="line">###### BFC的使用场景？</span><br><span class="line"></span><br><span class="line">- 去除边距重叠现象</span><br><span class="line">- 清除浮动（让父元素的高度包含子浮动元素）</span><br><span class="line">- 避免某元素被浮动元素覆盖</span><br><span class="line">- 避免多列布局由于宽度计算四舍五入而自动换行</span><br><span class="line">##### 普通图层和复合涂层</span><br><span class="line"></span><br><span class="line">浏览器渲染的图层一般包含两大类：**普通图层**以及**复合图层**</span><br><span class="line">- 首先，普通文档流内可以理解为一个复合图层（这里称为**默认复合层**，里面不管添加多少元素，其实都是在同一个复合图层中）</span><br><span class="line">- 其次，absolute布局（fixed也一样），虽然可以脱离普通文档流，但它仍然属于默认复合层。</span><br><span class="line">- 然后，可以通过**硬件加速**的方式，声明一个新的复合图层，它会单独分配资源（当然也会脱离普通文档流，这样一来，不管这个复合图层中怎么变化，也不会影响默认复合层里的回流重绘）</span><br><span class="line">- 可以简单理解下：**GPU中，各个复合图层是单独绘制的，所以互不影响，这也是为什么某些场景硬件加速效果一级棒**</span><br><span class="line">###### 如何变成复合图层（硬件加速）</span><br><span class="line">- 最常用的方式：translate3d、translateZ</span><br><span class="line">- opacity属性&#x2F;过渡动画（需要动画执行的过程中才会创建合成层，动画没有开始或结束后元素还会回到之前的状态）</span><br><span class="line">- \&lt;video&gt;\&lt;iframe&gt;\&lt;canvas&gt;\&lt;webgl&gt;等元素</span><br><span class="line">###### 复合图层的作用？</span><br><span class="line">一般一个元素开启硬件加速后会变成复合图层，可以独立于普通文档流中，改动后可以避免整个页面重绘，提升性能</span><br><span class="line">但是尽量不要大量使用复合图层，否则由于资源消耗过度，页面反而会变的更卡</span><br><span class="line">###### 硬件加速时请使用index</span><br><span class="line">使用硬件加速时，尽可能的使用index，防止浏览器默认给后续的元素创建复合层渲染</span><br><span class="line">- 具体的原理时这样的：</span><br><span class="line"></span><br><span class="line">webkit CSS3中，如果这个元素添加了硬件加速，并且index层级比较低，</span><br><span class="line">那么在这个元素的后面其它元素（层级比这个元素高的，或者相同的，并且releative或absolute属性相同的），会默认变为复合层渲染，如果处理不当会极大的影响性能</span><br><span class="line">简单点理解，其实可以认为是一个隐式合成的概念：如果a是一个复合图层，而且b在a上面，那么b也会被隐式转为一个复合图层，这点需要特别注意</span><br><span class="line"></span><br><span class="line">##### CSS 引入的方式有哪些? link 和@import 的区别是?</span><br><span class="line">有四种：内联(元素上的style属性)、内嵌(style标签)、外链(link)、导入(@import) link和@import的区别：</span><br><span class="line">- link是标签，无兼容问题；@import低版本的浏览器不支持。</span><br><span class="line">- link引用CSS时，在页面载入时同时加载；@import需要页面网页完全载入以后加载。</span><br><span class="line">- link支持使用Javascript控制DOM去改变样式；而@import不支持</span><br><span class="line">##### 渐进增强和优雅降级</span><br><span class="line">- **优雅降级**一开始就构建完整的功能，然后再针对低版本浏览器进行兼容。</span><br><span class="line">- **渐进增强**针对低版本浏览器进行构建页面，保证最基本的功能，然后再针对高级浏览器进行效果、交互等改进和追加功能达到更好的用户体验。</span><br><span class="line"></span><br><span class="line">### 优化</span><br><span class="line">[Vue 项目性能优化 — 实践指南（网上最全 &#x2F; 详细） - 掘金](https:&#x2F;&#x2F;juejin.im&#x2F;post&#x2F;5d548b83f265da03ab42471d)</span><br><span class="line"></span><br><span class="line">[20W字囊括上百个前端面试题的项目开源了 - 掘金](https:&#x2F;&#x2F;juejin.im&#x2F;post&#x2F;5d55de676fb9a06b0d7c8130)</span><br><span class="line"></span><br><span class="line">[深入 JavaScript 设计模式，从此有了优化代码的理论依据 - 掘金](https:&#x2F;&#x2F;juejin.im&#x2F;post&#x2F;5d58ca046fb9a06ad0056cc7)</span><br><span class="line"></span><br><span class="line">[30 道 Vue 面试题，内含详细讲解（涵盖入门到精通，自测 Vue 掌握程度） - 掘金](https:&#x2F;&#x2F;juejin.im&#x2F;post&#x2F;5d59f2a451882549be53b170)</span><br><span class="line">[前端该如何准备数据结构和算法？ - 掘金](https:&#x2F;&#x2F;juejin.im&#x2F;post&#x2F;5d5b307b5188253da24d3cd1)</span><br><span class="line">### node</span><br><span class="line">##### module.exports和exports的区别</span><br></pre></td></tr></table></figure>
+<ul>
+<li>module.exports和exports是node分别暴露的两个对象  </li>
+<li>module.exports和exports指向同一个{}</li>
+<li>module.exports = {<br>  a: a,<br>  b: b<br>}<br>exports.a = a<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">### 遇到的问题</span><br><span class="line">1. 小程序将时间转为时间戳</span><br></pre></td></tr></table></figure>
+console.log(new Date(‘2018-09-03 15:46:13’.replace(/-/g,”/“)).getTime())<pre><code>
+</code></pre>
+</li>
+</ul>
+<ul>
+<li>函数式编程  </li>
+<li>面向对象试编程</li>
+<li>高阶函数</li>
+</ul>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title='0' data-url='http://link.hhtjim.com/163/425570952.mp3'></li>
+                        
+                    
+                        
+                            <li title='1' data-url='http://link.hhtjim.com/163/425570952.mp3'></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='false'
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r=''
+        data-o=''
+        data-a=''
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>
